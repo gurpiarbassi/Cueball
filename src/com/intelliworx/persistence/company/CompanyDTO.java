@@ -2,6 +2,11 @@ package com.intelliworx.persistence.company;
 
 import java.util.Date;
 
+/**
+ * Represents a Company entity
+ * @author gurps
+ *
+ */
 public class CompanyDTO implements ICompanyDTO{
 
 	private Integer primaryKey;
