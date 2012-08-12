@@ -6,14 +6,15 @@
   <property name="mysql.username" value="root"/>
   <property name="mysql.pwd" value="intelliworx"/>
   <property name="mysql.dbname" value="cueball"/>
+  <property name="schemaFile" value="mysql/schema/schema.sql.txt"/>
  
   <!-- mysqladmin is used to create a database. -->
   <target name="create_db">
-    <exec executable="${mysqladmin}">
+    <exec executable="${mysqladmin} &lt; ${schemaFile}">
       <arg value="--user=${mysql.username}"/>
       <arg value="--password=${mysql.pwd}"/>
-      <arg value="CREATE"/>
-      <arg value="${mysql.dbname} IF NOT EXISTS"/>
+      <!--<arg value="CREATE"/>
+      <arg value="${mysql.dbname} IF NOT EXISTS"/>-->
     </exec>
   </target>
  
