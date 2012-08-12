@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-
+       //Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.intelliworx.persistence.Company"
+         table="Company">
+<id name="primaryKey" column="ID">
+<generator/>
+</id>
+ 
+<property name="name">
+	<column name="NAME"/>
+</property>
+<property name="registrationNumber">
+	<column name="REG_NO"/>
+</property>
+<property name="addressId">
+	<column name="ADDRESS_ID"/>
+</property>
+<property name="code">
+	<column name="CODE"/>
+</property>
+<property name="taxSchemeId">
+	<column name="TX_SCHEME_ID"/>
+</property>
+<property name="dateCreated">
+	<column name="DATE_CREATED"/>
+</property>
+<property name="dateModified">
+	<column name="DATE_MODIFIED"/>
+</property>
+<property name="optCount">
+	<column name="OPT_COUNT"/>
+</property>
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,7 @@
+#! /bin/bash
+PATH=/usr/local/:$PATH
+
+sqlite3 cueball.db
+.read ../schema/schema.sql.txt;
+#.tables company
+.exit;

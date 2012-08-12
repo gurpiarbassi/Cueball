@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="create_db" name="Create a database in mysql using Ant">
+ 
+  <!-- The following properties need to be changed according to your environment. -->
+  <property name="mysqladmin" value="mysqladmin"/>
+  <property name="mysql.username" value="root"/>
+  <property name="mysql.pwd" value="intelliworx"/>
+  <property name="mysql.dbname" value="cueball"/>
+ 
+  <!-- mysqladmin is used to create a database. -->
+  <target name="create_db">
+    <exec executable="${mysqladmin}">
+      <arg value="--user=${mysql.username}"/>
+      <arg value="--password=${mysql.pwd}"/>
+      <arg value="CREATE"/>
+      <arg value="${mysql.dbname} IF NOT EXISTS"/>
+    </exec>
+  </target>
+ 
+</project>
