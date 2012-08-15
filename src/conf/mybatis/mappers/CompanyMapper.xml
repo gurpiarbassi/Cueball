@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.intelliworx.persistence.company.ICompanyDAO">
+
+  <select id="findByPrimaryKey" parameterType="int" resultType="Company">
+    SELECT
+        ID,
+		NAME,
+		REG_NO,
+		ADDRESS_ID,
+		CODE,
+		INC_DATE,
+		TX_SCHEME_ID,
+		DATE_CREATED,
+		DATE_MODIFIED,
+		OPT_COUNT,
+	FROM COMPANY
+    WHERE ID = #{id}
+  </select>
+</mapper>

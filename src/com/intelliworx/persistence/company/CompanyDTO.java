@@ -2,14 +2,15 @@ package com.intelliworx.persistence.company;
 
 import java.util.Date;
 
+import com.intelliworx.persistence.PersistenceEntity;
+
 /**
  * Represents a Company entity
  * @author gurps
  *
  */
-public class CompanyDTO implements ICompanyDTO{
+public class CompanyDTO extends PersistenceEntity implements ICompanyDTO{
 
-	private Integer primaryKey;
 	private String name;
 	private String registrationNumber;
 	private Integer addressId;
@@ -17,14 +18,7 @@ public class CompanyDTO implements ICompanyDTO{
 	private Integer taxSchemeId;
 	private Date dateCreated;
 	private Date dateModified;
-	private int optCount;
 	
-	public Integer getPrimaryKey() {
-		return primaryKey;
-	}
-	public void setPrimaryKey(Integer primaryKey) {
-		this.primaryKey = primaryKey;
-	}
 	public String getName() {
 		return name;
 	}
@@ -66,12 +60,6 @@ public class CompanyDTO implements ICompanyDTO{
 	}
 	public void setDateModified(Date dateModified) {
 		this.dateModified = dateModified;
-	}
-	public int getOptCount() {
-		return optCount;
-	}
-	public void setOptCount(int optCount) {
-		this.optCount = optCount;
 	}
 	
 }

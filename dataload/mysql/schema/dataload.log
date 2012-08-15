@@ -1,0 +1,36 @@
+--------------
+DROP DATABASE IF EXISTS CUEBALL
+--------------
+
+--------------
+CREATE DATABASE CUEBALL
+--------------
+
+--------------
+GRANT ALL ON CUEBALL.* to 'cueball_user'@'localhost' identified by 'test1234'
+--------------
+
+--------------
+DROP TABLE IF EXISTS COMPANY
+--------------
+
+--------------
+CREATE TABLE COMPANY
+(
+	ID INTEGER PRIMARY KEY,
+	NAME VARCHAR(100) NOT NULL,
+	REG_NO VARCHAR(20) NOT NULL,
+	ADDRESS_ID INTEGER NOT NULL,
+	CODE VARCHAR(20),
+	INC_DATE DATE NOT NULL,
+	TX_SCHEME_ID INTEGER,
+	DATE_CREATED DATE NOT NULL,
+	DATE_MODIFIED DATE,
+	OPT_COUNT INTEGER NOT NULL DEFAULT 0
+)
+--------------
+
+--------------
+COMMIT
+--------------
+

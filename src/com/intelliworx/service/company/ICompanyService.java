@@ -1,15 +1,14 @@
 package com.intelliworx.service.company;
 
-import com.intelliworx.domain.company.ICompany;
 import com.intelliworx.persistence.company.ICompanyDTO;
 
 public interface ICompanyService {
 
-	public void save(ICompany company);
+	//public void save(ICompany company);
 	
 	public ICompanyDTO find(Integer companyId);
 	
 	//public ICompanyDTO find(String companyCode);
 	
-	public ICompany createCompany();
+	//public ICompany createCompany();
 }

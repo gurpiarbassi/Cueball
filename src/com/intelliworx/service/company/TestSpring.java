@@ -9,12 +9,11 @@ public class TestSpring {
 	public static void main(String[] args){
 	
 		
-		ApplicationContext context= new ClassPathXmlApplicationContext(new String[]{"conf/spring/applicationContext.xml", "conf/spring/spring-dataAccessContext.xml"});
+		ApplicationContext context= new ClassPathXmlApplicationContext(new String[]{"spring/applicationContext.xml", "spring/spring-dataAccessContext.xml", "mybatis/*.*"});
 	    BeanFactory factory = context;
-	    ICompanyService myBean = (ICompanyService) factory
-				.getBean("companyService");
+	    ICompanyService myBean = (ICompanyService) factory.getBean("companyService");
 	    Object x = myBean.find(1);
-				System.out.println(x);
+		System.out.println(x);
 	    
 	    
 //	XmlBeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource(

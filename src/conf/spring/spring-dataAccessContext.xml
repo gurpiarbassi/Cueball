@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
  
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-	<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-	<property name="url" value="jdbc:mysql://localhost/samples"/>
-	<property name="username" value="root"/>
-	<property name="password" value="pwForRoot"/>
+	<property name="driverClassName" value="${cueball.jdbc.driverclass}"/>
+	<property name="url" value="${cueball.jdbc.url}"/>
+	<property name="username" value="${cueball.jdbc.username}"/>
+	<property name="password" value="${cueball.jdbc.password}"/>
+	<property name="validationQuery" value="SELECT 1" />
 </bean>
 
-<bean id = "sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-	<property name="dataSource" ref="dataSource"/>
-	<property name="mappingResources">
-	<list>
-		<value>../hibernate/company.hbm.xml</value>
-	</list>
-	</property>
-	<property name="hibernateProperties">
-		<value>hibernate.dialect=org.hibernate.dialect.HSQLDialect</value>
-	</property>
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+ <property name="dataSource" ref="dataSource" />
 </bean>
 
-<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-	<property name="sessionFactory">
-		<ref bean="sessionFactory"/>
-	</property>
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+ <property name="dataSource" ref="dataSource" />
+ <!-- <property name="mapperLocations" value="classpath:conf/mybatis/mappers/*.xml" />-->
+ <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 </bean>
+
 
 <import resource="spring-dao.xml"/>
 
