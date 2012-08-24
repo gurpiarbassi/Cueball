@@ -1,14 +1,14 @@
 package com.intelliworx.service.company;
-import junit.framework.TestCase;
+//import junit.framework.TestCase;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import com.intelliworx.domain.company.ICompany;
 
 
-public class TestCompanyService extends TestCase {
+public class TestCompanyService{// extends TestCase {
 
-	@Test
+	//@Test
 	public void testFindCompany(){
 		
 //		XmlBeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource(

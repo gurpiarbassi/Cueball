@@ -1,0 +1,20 @@
+ #!/bin/bash 
+ set -e
+ 
+ database="/home/$USER/databases/CUEBALL.db"
+ if [ -e "$database" ];then
+     echo "deleting database"
+     rm $database
+ fi
+ 
+ #create the database schema
+ 
+echo "Creating CUEBALL database now"
+
+/usr/local/sqlite3 $database < "../schema/schema.sql.txt" >> "../../logs/dataload.log"
+
+echo "loading bootstrap data"
+
+/usr/local/sqlite3 $database < "../bootstrap/bootstrap.sql.txt" >> "../../logs/dataload.log"
+
+echo "Database created at $database"

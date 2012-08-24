@@ -1,22 +1,126 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="create_db" name="Create a database in mysql using Ant">
- 
-  <!-- The following properties need to be changed according to your environment. -->
-  <property name="mysqladmin" value="mysqladmin"/>
-  <property name="mysql.username" value="root"/>
-  <property name="mysql.pwd" value="intelliworx"/>
-  <property name="mysql.dbname" value="cueball"/>
-  <property name="schemaFile" value="schema.sql.txt"/>
- 
-  <!-- mysqladmin is used to create a database. -->
-  <target name="create_db">
-    <exec executable="${mysqladmin} &lt; ${schemaFile}">
-      <arg value="--user=${mysql.username}"/>
-      <arg value="--password=${mysql.pwd}"/>
-      <arg value="--verbose"/>
-      <!--<arg value="CREATE"/>
-      <arg value="${mysql.dbname} IF NOT EXISTS"/>-->
-    </exec>
-  </target>
- 
+<project name="cueball" basedir="." default="echo">
+
+<property name="jdbcDriver"  	value="../lib/sqlite-jdbc-3.7.2.jar"/>
+<property name="db.name"        value="CUEBALL.db"/>
+<property name="url"            value="jdbc:sqlite:/home/gurps/databases"/>
+<property name="driver"         value="org.sqlite.JDBC"/>
+<property name="userid"         value="root"/>
+<property name="password"       value="root"/>
+
+
+  
+<target name="echo">
+	<echo>The targets that can be run are: </echo>
+	<echo>ant sqlcreate</echo>
+	<echo>ant sqlschema</echo>
+	<echo>ant sqlpopulate</echo>
+	<echo>ant sqlselect</echo>
+	<echo>ant sqldrop</echo>
+</target>
+
+<target name="run_main" description="runs main method">
+    <java classname="com.intelliworx.cueball.dataload.Test"
+          failonerror="true"
+          fork="true">
+        <sysproperty key="DEBUG" value="true"/>
+        <!-- <arg value="${url}/${db.name}"/>-->
+       <classpath>
+      		<pathelement path="${classpath}"/>
+      		<pathelement location="../bin/"/>
+      		<pathelement location="../lib/"/>
+	   </classpath>
+    </java>
+</target>
+
+<target name="sqlschema">
+  <sql
+  driver="${driver}"
+  url="${url}/${db.name}"
+  userid="${userid}"
+  password="${password}"
+  print="yes"
+  classpath="${jdbcDriver}">
+   select * from company;
+  </sql>
+</target>
+
+<target name="sqldrop">
+  <sql
+   driver="${driver}"
+   url="${url}/${db.name}"
+   userid="${userid}"
+   password="${password}"
+   print="yes"
+   classpath="${jdbcDriver}">
+   drop VIEW ProjProg;
+   drop INDEX Programmer_idx;
+   drop INDEX Project_idx;
+   drop TABLE ProjectProgrammer;
+   drop TABLE Programmer;
+   drop TABLE Project;
+  </sql>
+</target>
+
+<target name="sqlcreate">
+  <sql
+   driver="${driver}"
+   url="${url}/${db.name}"
+   userid="${userid}"
+   password="${password}"
+   print="yes"
+   classpath="${jdbcDriver}">
+   create table Project (id INTEGER PRIMARY KEY, short_description varchar(30), long_description varchar(120));
+   create index Project_idx on Project (short_description);
+   create table Programmer (id INTEGER PRIMARY KEY, full_name varchar(100));
+   create index Programmer_idx on Programmer (full_name);
+   create table ProjectProgrammer (project_id INTEGER, programmer_id INTEGER);
+   create view ProjProg as select Project.short_description, Programmer.full_name 
+   from Programmer 
+   join ProjectProgrammer 
+   on Programmer.id = ProjectProgrammer.programmer_id
+   join Project 
+   on ProjectProgrammer.project_id = Project.id; 
+  </sql>
+</target>
+
+<target name="sqlpopulate" >
+  <sql
+   driver="${driver}"
+   url="${url}/${db.name}"
+   userid="${userid}"
+   password="${password}"
+   print="yes"
+   classpath="${jdbcDriver}">
+   insert into Programmer (full_name) values('Greg Helton');
+   insert into Programmer (full_name) values('Yehuda Katz');
+   insert into Programmer (full_name) values('Bob Martin');
+   insert into Project (short_description, long_description) values('whack-a-mole', 'good name for a project with no unit tests');
+   insert into ProjectProgrammer values(1,1);
+   insert into ProjectProgrammer values(1,2);
+   insert into ProjectProgrammer values(1,3);
+  </sql>
+</target>
+
+<target name="sqlselect" >
+  <sql
+   driver="${driver}"
+   url="${url}/${db.name}"
+   userid="${userid}"
+   password="${password}"
+   print="yes"
+   classpath="${jdbcDriver}">
+   select * from Project;
+
+   select * from Programmer;
+
+   select *
+   from Programmer 
+   join ProjectProgrammer 
+   on Programmer.id = ProjectProgrammer.programmer_id
+   join Project 
+   on ProjectProgrammer.project_id = Project.id; 
+
+   select * from ProjProg;
+   </sql>
+</target>
 </project>

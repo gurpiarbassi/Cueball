@@ -6,9 +6,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 	<property name="driverClassName" value="${cueball.jdbc.driverclass}"/>
 	<property name="url" value="${cueball.jdbc.url}"/>
-	<property name="username" value="${cueball.jdbc.username}"/>
-	<property name="password" value="${cueball.jdbc.password}"/>
-	<property name="validationQuery" value="SELECT 1" />
+	<property name="username" value=""/>
+	<property name="password" value=""/>
+	<!-- <property name="validationQuery" value="SELECT 1" />-->
 </bean>
 
 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
