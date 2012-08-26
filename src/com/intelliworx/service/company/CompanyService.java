@@ -24,6 +24,7 @@ public class CompanyService implements ICompanyService{
 	@Override
 	public ICompanyDTO find(Integer companyId) {
 		// TODO Auto-generated method stub
+		System.out.println("company = " +companyId);
 		return this.companyDAO.findByPrimaryKey(companyId);
 	}
 

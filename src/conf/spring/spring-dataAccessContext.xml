@@ -6,8 +6,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 	<property name="driverClassName" value="${cueball.jdbc.driverclass}"/>
 	<property name="url" value="${cueball.jdbc.url}"/>
-	<property name="username" value=""/>
-	<property name="password" value=""/>
+	<!-- <property name="username" value=""/>
+	<property name="password" value=""/>-->
 	<!-- <property name="validationQuery" value="SELECT 1" />-->
 </bean>
 
@@ -20,7 +20,6 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
  <!-- <property name="mapperLocations" value="classpath:conf/mybatis/mappers/*.xml" />-->
  <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 </bean>
-
 
 <import resource="spring-dao.xml"/>
 

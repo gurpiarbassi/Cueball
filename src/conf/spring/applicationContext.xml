@@ -18,7 +18,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	            <tx:method name="update*" rollback-for="Exception" isolation="READ_COMMITTED"/>
 	            <tx:method name="create*" rollback-for="Exception" isolation="READ_COMMITTED"/>
 	            <tx:method name="delete*" rollback-for="Exception" isolation="READ_COMMITTED"/>
-	            <tx:method name="*" read-only="true" rollback-for="Exception" isolation="READ_COMMITTED"/>
+	            <tx:method name="*" read-only="true" rollback-for="Exception" isolation="READ_UNCOMMITTED"/>
 	        </tx:attributes>
 	</tx:advice>
 	

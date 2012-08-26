@@ -14,7 +14,7 @@
 		TX_SCHEME_ID,
 		DATE_CREATED,
 		DATE_MODIFIED,
-		OPT_COUNT,
+		OPT_COUNT
 	FROM COMPANY
     WHERE ID = #{id}
   </select>

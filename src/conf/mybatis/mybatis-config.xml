@@ -15,4 +15,10 @@
 		 <setting name="jdbcTypeForNull" value="OTHER" />
 		 <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 	 </settings>
+	 <typeAliases>
+                <typeAlias alias="company" type="com.intelliworx.persistence.company.ICompanyDTO"/>
+      </typeAliases>
+      <mappers>
+        <mapper resource="com/intelliworx/persistence/company/ICompanyDAO.xml"/>
+    </mappers>
 </configuration>
