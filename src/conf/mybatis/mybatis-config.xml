@@ -15,10 +15,15 @@
 		 <setting name="jdbcTypeForNull" value="OTHER" />
 		 <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 	 </settings>
+	 
 	 <typeAliases>
-                <typeAlias alias="company" type="com.intelliworx.persistence.company.ICompanyDTO"/>
+                <typeAlias alias="Company" type="com.intelliworx.persistence.company.ICompanyDTO"/>
       </typeAliases>
+      
+      <objectFactory type="com.intelliworx.inf.MybatisObjectFactory"/>
+	  
       <mappers>
         <mapper resource="com/intelliworx/persistence/company/ICompanyDAO.xml"/>
-    </mappers>
+     </mappers>
+     
 </configuration>

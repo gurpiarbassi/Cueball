@@ -12,6 +12,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<import resource="spring-services.xml"/>
 	<import resource="spring-domain.xml"/>
 	
+	<bean id="intelliworxObjectFactory" class="com.intelliworx.inf.ObjectFactory" lazy-init="false"/>
+	
 	<tx:advice id="simpleTxAdvice">
 	        <tx:attributes>
 	            <tx:method name="insert*" rollback-for="Exception" isolation="READ_COMMITTED"/>

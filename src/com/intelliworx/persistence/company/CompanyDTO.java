@@ -16,6 +16,7 @@ public class CompanyDTO extends PersistenceEntity implements ICompanyDTO{
 	private Integer addressId;
 	private String code;
 	private Integer taxSchemeId;
+	private Date incorporationDate;
 	private Date dateCreated;
 	private Date dateModified;
 	
@@ -61,5 +62,12 @@ public class CompanyDTO extends PersistenceEntity implements ICompanyDTO{
 	public void setDateModified(Date dateModified) {
 		this.dateModified = dateModified;
 	}
+	public Date getIncorporationDate() {
+		return incorporationDate;
+	}
+	public void setIncorporationDate(Date incorporationDate) {
+		this.incorporationDate = incorporationDate;
+	}
+	
 	
 }
