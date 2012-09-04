@@ -7,4 +7,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <alias name="companyDTO" alias="com.intelliworx.persistence.company.ICompanyDTO"/>    
 <bean name="companyDTO" class="com.intelliworx.persistence.company.CompanyDTO"/>
 
+<alias name="addressDTO" alias="com.intelliworx.persistence.address.IAddressDTO"/>    
+<bean name="addressDTO" class="com.intelliworx.persistence.address.AddressDTO"/>
+
 </beans>

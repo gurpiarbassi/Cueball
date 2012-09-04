@@ -7,28 +7,55 @@
 	  <id property="primaryKey" column="ID" />
 	  <result property="name" column="NAME"/>
 	  <result property="registrationNumber" column="REG_NO"/>
-	  <result property="addressId" column="ADDRESS_ID"/>
+	 
 	  <result property="code" column="CODE"/>
 	  <result property="incorporationDate" column="INC_DATE" javaType="java.util.Date"/>
 	  <result property="taxSchemeId" column="TX_SCHEME_ID"/>
 	  <result property="dateCreated" column="DATE_CREATED" javaType="java.util.Date"/>
 	  <result property="dateModified" column="DATE_MODIFIED" javaType="java.util.Date"/>
 	  <result property="optCount" column="OPT_COUNT"/>
+	   <association property="address" javaType="Address">
+	    <id property="primaryKey" column="ADDRESS_ID"/>
+	    <result property="address1" column="ADDRESS_1"/>
+		<result property="address2" column="ADDRESS_2"/>
+		<result property="address3" column="ADDRESS_3"/>
+		<result property="address4" column="ADDRESS_4"/>
+		<result property="address5" column="ADDRESS_5"/>
+		<result property="postalCode" column="POSTAL_CODE"/>
+		<result property="emailAddress" column="EMAIL"/>
+		<result property="telephone" column="TELEPHONE"/>
+		<result property="fax" column="FAX"/>
+		<result property="dateCreated" column="ADDRESS_CREATED" javaType="java.util.Date"/>
+	    <result property="dateModified" column="ADDRESS_MODIFIED" javaType="java.util.Date"/>
+	    <result property="optCount" column="ADDRESS_OPT_COUNT"/>
+	  </association>
   </resultMap>
 
   <select id="findByPrimaryKey" parameterType="int" resultMap="companyResultMap">
     SELECT
-        ID,
-		NAME,
-		REG_NO,
-		ADDRESS_ID,
-		CODE,
-		INC_DATE,
-		TX_SCHEME_ID,
-		DATE_CREATED,
-		DATE_MODIFIED,
-		OPT_COUNT
-	FROM COMPANY
-    WHERE ID = #{id}
+        c.ID,
+		c.NAME,
+		c.REG_NO,
+		a.ID as ADDRESS_ID,
+		a.ADDRESS_1,
+		a.ADDRESS_2,
+		a.ADDRESS_3,
+		a.ADDRESS_4,
+		a.ADDRESS_5,
+		a.POSTAL_CODE,
+		a.EMAIL,
+		a.TELEPHONE,
+		a.FAX,
+		a.DATE_CREATED as ADDRESS_CREATED,
+		a.DATE_MODIFIED as ADDRESS_MODIFIED,
+		a.OPT_COUNT as ADDRESS_OPT_COUNT,
+		c.CODE,
+		c.INC_DATE,
+		c.TX_SCHEME_ID,
+		c.DATE_CREATED,
+		c.DATE_MODIFIED,
+		c.OPT_COUNT
+	FROM COMPANY c LEFT OUTER JOIN ADDRESS a on (c.ADDRESS_ID = a.ID)
+    WHERE c.ID = #{id}
   </select>
 </mapper>

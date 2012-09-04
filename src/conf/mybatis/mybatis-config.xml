@@ -18,12 +18,14 @@
 	 
 	 <typeAliases>
                 <typeAlias alias="Company" type="com.intelliworx.persistence.company.ICompanyDTO"/>
+                <typeAlias alias="Address" type="com.intelliworx.persistence.address.IAddressDTO"/>
       </typeAliases>
       
       <objectFactory type="com.intelliworx.inf.MybatisObjectFactory"/>
 	  
       <mappers>
         <mapper resource="com/intelliworx/persistence/company/ICompanyDAO.xml"/>
+        <mapper resource="com/intelliworx/persistence/address/IAddressDAO.xml"/>
      </mappers>
      
 </configuration>

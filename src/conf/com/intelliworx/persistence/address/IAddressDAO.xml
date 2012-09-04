@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.intelliworx.persistence.address.IAddressDAO">
+  
+  <resultMap id="addressResultMap" type="Address">
+	  <id property="primaryKey" column="ID" />
+	  <result property="address1" column="ADDRESS_1"/>
+	  <result property="address2" column="ADDRESS_2"/>
+	  <result property="address3" column="ADDRESS_3"/>
+	  <result property="address4" column="ADDRESS_4"/>
+	  <result property="address5" column="ADDRESS_5"/>
+	  <result property="postalCode" column="POSTAL_CODE"/>
+	  <result property="emailAddress" column="EMAIL"/>
+	  <result property="telephone" column="TELEPHONE"/>
+	  <result property="fax" column="FAX"/>
+	  <result property="dateCreated" column="DATE_CREATED" javaType="java.util.Date"/>
+	  <result property="dateModified" column="DATE_MODIFIED" javaType="java.util.Date"/>
+	  <result property="optCount" column="OPT_COUNT"/>
+  </resultMap>
+
+  <select id="findByPrimaryKey" parameterType="int" resultMap="addressResultMap">
+    SELECT
+        ID,
+		ADDRESS_1,
+		ADDRESS_2,
+		ADDRESS_3,
+		ADDRESS_4,
+		ADDRESS_5,
+		POSTAL_CODE,
+		EMAIL,
+		TELEPHONE,
+		FAX,
+		DATE_CREATED,
+		DATE_MODIFIED,
+		OPT_COUNT
+	FROM ADDRESS
+    WHERE ID = #{id}
+  </select>
+</mapper>
