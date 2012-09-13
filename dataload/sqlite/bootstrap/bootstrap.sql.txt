@@ -1,21 +1,21 @@
 BEGIN TRANSACTION;
 
 	INSERT INTO CURRENCY(ID, CODE, DESCRIPTION, DATE_CREATED)
-	VALUES(1, 'GBP', 'BRITISH POUND', datetime());
+	VALUES(1, 'GBP', 'BRITISH POUND', datetime(current_timestamp, 'localtime'));
 	
 	INSERT INTO CURRENCY(ID, CODE, DESCRIPTION, DATE_CREATED)
-	VALUES(2, 'USD', 'UNITED STATES DOLLAR', datetime());
+	VALUES(2, 'USD', 'UNITED STATES DOLLAR', datetime(current_timestamp, 'localtime'));
 	
 	INSERT INTO ADDRESS(ID, ADDRESS_1, ADDRESS_2, POSTAL_CODE, EMAIL, TELEPHONE, DATE_CREATED)
-	VALUES(1, '2 Haytor Rise', 'Coventry', 'CV2 3LE', 'info@intelliworx.co.uk', '07547032355', datetime());
+	VALUES(1, '2 Haytor Rise', 'Coventry', 'CV2 3LE', 'info@intelliworx.co.uk', '07547032355', datetime(current_timestamp, 'localtime'));
 	
 	INSERT INTO ADDRESS(ID, ADDRESS_1, ADDRESS_2, POSTAL_CODE, EMAIL, TELEPHONE, DATE_CREATED)
-	VALUES(2, 'Torwood Close', 'Coventry', 'CV4 8HX', 'hr@pcmsgroup.com', '02476123456', datetime());
+	VALUES(2, 'Torwood Close', 'Coventry', 'CV4 8HX', 'hr@pcmsgroup.com', '02476123456', datetime(current_timestamp, 'localtime'));
 	
 	INSERT INTO CUSTOMER(ID, NAME, CODE, ADDRESS_ID, DATE_CREATED)
-	VALUES(1, 'PCMS', 'PCMS', 2, datetime());
+	VALUES(1, 'PCMS', 'PCMS', 2, datetime(current_timestamp, 'localtime'));
 	
 	INSERT INTO COMPANY(ID, NAME, REG_NO, ADDRESS_ID, CODE, INC_DATE, DATE_CREATED)
-	VALUES(1, 'INTELLIWORX LIMITED', '123435', 1, 'INTWX', '2011-09-23', datetime());
+	VALUES(1, 'INTELLIWORX LIMITED', '123435', 1, 'INTWX', datetime(current_timestamp, 'localtime'), datetime(current_timestamp, 'localtime'));
 	
 COMMIT;

@@ -17,6 +17,8 @@ public interface ICompanyDTO extends IPersistenceEntity {
 	public void setCode(String code);
 	public Integer getTaxSchemeId();
 	public void setTaxSchemeId(Integer taxSchemeId);
+	public Date getIncorporationDate();
+	public void setIncorporationDate(Date incorporationDate);
 	public Date getDateCreated();
 	public void setDateCreated(Date dateCreated);
 	public Date getDateModified();

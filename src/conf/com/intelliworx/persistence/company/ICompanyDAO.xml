@@ -7,12 +7,11 @@
 	  <id property="primaryKey" column="ID" />
 	  <result property="name" column="NAME"/>
 	  <result property="registrationNumber" column="REG_NO"/>
-	 
 	  <result property="code" column="CODE"/>
-	  <result property="incorporationDate" column="INC_DATE" javaType="java.util.Date"/>
+	  <result property="incorporationDate" column="INC_DATE" javaType="java.util.Date" jdbcType="VARCHAR"/>
 	  <result property="taxSchemeId" column="TX_SCHEME_ID"/>
-	  <result property="dateCreated" column="DATE_CREATED" javaType="java.util.Date"/>
-	  <result property="dateModified" column="DATE_MODIFIED" javaType="java.util.Date"/>
+	  <result property="dateCreated" column="DATE_CREATED" javaType="java.util.Date" jdbcType="VARCHAR"/>
+	  <result property="dateModified" column="DATE_MODIFIED" javaType="java.util.Date" jdbcType="VARCHAR"/>
 	  <result property="optCount" column="OPT_COUNT"/>
 	   <association property="address" javaType="Address">
 	    <id property="primaryKey" column="ADDRESS_ID"/>
@@ -25,8 +24,8 @@
 		<result property="emailAddress" column="EMAIL"/>
 		<result property="telephone" column="TELEPHONE"/>
 		<result property="fax" column="FAX"/>
-		<result property="dateCreated" column="ADDRESS_CREATED" javaType="java.util.Date"/>
-	    <result property="dateModified" column="ADDRESS_MODIFIED" javaType="java.util.Date"/>
+		<result property="dateCreated" column="ADDRESS_CREATED" javaType="java.util.Date" jdbcType="VARCHAR"/>
+	    <result property="dateModified" column="ADDRESS_MODIFIED" javaType="java.util.Date" jdbcType="VARCHAR"/>
 	    <result property="optCount" column="ADDRESS_OPT_COUNT"/>
 	  </association>
   </resultMap>

@@ -19,7 +19,11 @@
 	 <typeAliases>
                 <typeAlias alias="Company" type="com.intelliworx.persistence.company.ICompanyDTO"/>
                 <typeAlias alias="Address" type="com.intelliworx.persistence.address.IAddressDTO"/>
-      </typeAliases>
+     </typeAliases>
+      
+     <typeHandlers>
+ 	  			<typeHandler handler="com.intelliworx.inf.typehandler.DateTimeTypeHandler" javaType="java.util.Date" jdbcType="VARCHAR"/>
+	 </typeHandlers>
       
       <objectFactory type="com.intelliworx.inf.MybatisObjectFactory"/>
 	  

@@ -14,8 +14,8 @@
 	  <result property="emailAddress" column="EMAIL"/>
 	  <result property="telephone" column="TELEPHONE"/>
 	  <result property="fax" column="FAX"/>
-	  <result property="dateCreated" column="DATE_CREATED" javaType="java.util.Date"/>
-	  <result property="dateModified" column="DATE_MODIFIED" javaType="java.util.Date"/>
+	  <result property="dateCreated" column="DATE_CREATED" javaType="java.util.Date" jdbcType="VARCHAR"/>
+	  <result property="dateModified" column="DATE_MODIFIED" javaType="java.util.Date" jdbcType="VARCHAR"/>
 	  <result property="optCount" column="OPT_COUNT"/>
   </resultMap>
 
