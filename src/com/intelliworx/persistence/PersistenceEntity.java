@@ -1,12 +1,12 @@
 package com.intelliworx.persistence;
 
-import java.util.Date;
+import org.joda.time.LocalDateTime;
 
 public class PersistenceEntity implements IPersistenceEntity {
 
 	private Integer primaryKey;
-	private Date dateCreated;
-	private Date dateModified;
+	private LocalDateTime dateCreated;
+	private LocalDateTime dateModified;
 	private int optCount;
 	
 	public Integer getPrimaryKey() {
@@ -15,16 +15,16 @@ public class PersistenceEntity implements IPersistenceEntity {
 	public void setPrimaryKey(Integer primaryKey) {
 		this.primaryKey = primaryKey;
 	}
-	public Date getDateCreated() {
+	public LocalDateTime getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public Date getDateModified() {
+	public LocalDateTime getDateModified() {
 		return dateModified;
 	}
-	public void setDateModified(Date dateModified) {
+	public void setDateModified(LocalDateTime dateModified) {
 		this.dateModified = dateModified;
 	}
 	public int getOptCount() {

@@ -263,7 +263,7 @@ public class PersistenceDates {
 	     */
 	    if (databaseDate.length() == 8)
 	    {
-	      format.applyPattern("yyyyMMdd");
+	      format.applyPattern("yyyy-MM-dd");
 	    }
 	    else
 	    {

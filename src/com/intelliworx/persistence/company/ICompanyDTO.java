@@ -1,6 +1,6 @@
 package com.intelliworx.persistence.company;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import com.intelliworx.persistence.IPersistenceEntity;
 import com.intelliworx.persistence.address.IAddressDTO;
@@ -17,11 +17,7 @@ public interface ICompanyDTO extends IPersistenceEntity {
 	public void setCode(String code);
 	public Integer getTaxSchemeId();
 	public void setTaxSchemeId(Integer taxSchemeId);
-	public Date getIncorporationDate();
-	public void setIncorporationDate(Date incorporationDate);
-	public Date getDateCreated();
-	public void setDateCreated(Date dateCreated);
-	public Date getDateModified();
-	public void setDateModified(Date dateModified);
+	public LocalDate getIncorporationDate();
+	public void setIncorporationDate(LocalDate incorporationDate);
 
 }

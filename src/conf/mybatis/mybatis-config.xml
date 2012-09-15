@@ -22,7 +22,9 @@
      </typeAliases>
       
      <typeHandlers>
- 	  			<typeHandler handler="com.intelliworx.inf.typehandler.DateTimeTypeHandler" javaType="java.util.Date" jdbcType="VARCHAR"/>
+ 	  			<typeHandler handler="com.intelliworx.inf.typehandler.LocalDateTimeTypeHandler" javaType="org.joda.time.LocalDateTime" jdbcType="VARCHAR"/>
+ 	  			<typeHandler handler="com.intelliworx.inf.typehandler.LocalDateTypeHandler" javaType="org.joda.time.LocalDate" jdbcType="VARCHAR"/>
+ 	  			
 	 </typeHandlers>
       
       <objectFactory type="com.intelliworx.inf.MybatisObjectFactory"/>

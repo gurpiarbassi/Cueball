@@ -20,6 +20,7 @@ public class TestSpring {
 		
 		System.out.println(x.getDateCreated());
 		System.out.println(x.getDateModified());
+		System.out.println("inc date = " + x.getIncorporationDate());
 	}
 			
 }
