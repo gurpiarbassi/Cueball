@@ -28,7 +28,6 @@ public class LocalDateTimeTypeHandler implements TypeHandler<LocalDateTime> {
 			throws SQLException {
 		String value = rs.getString(columnName);
 		if (value != null) {
-			System.out.println("value is " + value);
 			return new LocalDateTime(value);
 		} else {
 			return null;
