@@ -8,7 +8,9 @@ public interface ICompanyService {
 	
 	public ICompanyDTO find(Integer companyId);
 	
-	//public ICompanyDTO find(String companyCode);
+	public ICompanyDTO find(String companyCode);
+	
+	public ICompanyDTO save(ICompanyDTO company);
 	
 	//public ICompany createCompany();
 }

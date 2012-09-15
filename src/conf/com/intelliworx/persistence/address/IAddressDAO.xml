@@ -37,4 +37,9 @@
 	FROM ADDRESS
     WHERE ID = #{id}
   </select>
+  
+  <insert id="insert" parameterType="com.intelliworx.persistence.address.IAddressDTO" keyProperty="primaryKey" keyColumn="ID" useGeneratedKeys="true">
+      	INSERT INTO ADDRESS (ADDRESS_1, ADDRESS_2, ADDRESS_3, ADDRESS_4, ADDRESS_5, POSTAL_CODE, EMAIL, TELEPHONE, FAX, DATE_CREATED)
+  		VALUES (#{address1},#{address2},#{address3},#{address4},#{address5},#{postalCode},#{emailAddress},#{telephone},#{fax},strftime('%Y-%m-%dT%H:%M:%S', current_timestamp, 'localtime'))  		
+  </insert>
 </mapper>

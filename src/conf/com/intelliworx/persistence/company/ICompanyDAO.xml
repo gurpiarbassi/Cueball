@@ -57,4 +57,38 @@
 	FROM COMPANY c LEFT OUTER JOIN ADDRESS a on (c.ADDRESS_ID = a.ID)
     WHERE c.ID = #{id}
   </select>
+  
+  <select id="findByCompanyCode" parameterType="java.lang.String" resultMap="companyResultMap">
+    SELECT
+        c.ID,
+		c.NAME,
+		c.REG_NO,
+		a.ID as ADDRESS_ID,
+		a.ADDRESS_1,
+		a.ADDRESS_2,
+		a.ADDRESS_3,
+		a.ADDRESS_4,
+		a.ADDRESS_5,
+		a.POSTAL_CODE,
+		a.EMAIL,
+		a.TELEPHONE,
+		a.FAX,
+		a.DATE_CREATED as ADDRESS_CREATED,
+		a.DATE_MODIFIED as ADDRESS_MODIFIED,
+		a.OPT_COUNT as ADDRESS_OPT_COUNT,
+		c.CODE,
+		c.INC_DATE,
+		c.TX_SCHEME_ID,
+		c.DATE_CREATED,
+		c.DATE_MODIFIED,
+		c.OPT_COUNT
+	FROM COMPANY c LEFT OUTER JOIN ADDRESS a on (c.ADDRESS_ID = a.ID)
+    WHERE c.CODE = #{code}
+  </select>
+  
+  <insert id="insert" parameterType="com.intelliworx.persistence.company.ICompanyDTO" keyProperty="primaryKey" keyColumn="ID" useGeneratedKeys="true">
+      	INSERT INTO COMPANY (NAME, REG_NO, CODE, INC_DATE, ADDRESS_ID, DATE_CREATED)
+  		VALUES (#{name}, #{registrationNumber}, #{code}, #{incorporationDate,jdbcType=VARCHAR}, #{address.primaryKey}, strftime('%Y-%m-%dT%H:%M:%S', current_timestamp, 'localtime'))
+  		
+  </insert>
 </mapper>

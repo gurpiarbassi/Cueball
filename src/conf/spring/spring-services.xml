@@ -7,6 +7,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <alias name="companyService" alias="com.intelliworx.service.company.ICompanyService"/>    
 <bean name="companyService" class="com.intelliworx.service.company.CompanyService">
     <property name="companyDAO" ref="companyDao"/>
+    <property name="addressDAO" ref="addressDao"/>
 </bean>
     
 
