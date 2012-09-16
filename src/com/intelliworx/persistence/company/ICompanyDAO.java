@@ -7,4 +7,6 @@ public interface ICompanyDAO {
 	public ICompanyDTO findByCompanyCode(String code);
 	
 	public void insert(ICompanyDTO companyDTO);
+	
+	public void update(ICompanyDTO companyDTO);
 }

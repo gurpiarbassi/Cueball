@@ -37,19 +37,18 @@ public class CompanyService implements ICompanyService{
 	}
 
 	@Override
-	public ICompanyDTO save(ICompanyDTO company) {
+	public void save(ICompanyDTO company) {
+		IAddressDTO address = company.getAddress();
 		if(company.getPrimaryKey() ==  null){
 			//insert
-			IAddressDTO address = company.getAddress();
 			addressDAO.insert(address);
-			System.out.println("address inserted with id = " + address.getPrimaryKey());
 			companyDAO.insert(company);
-			System.out.println("company inserted with id = " + company.getPrimaryKey());
-			return null;
+			System.out.println("Inserted the company");
 		}
 		else{
 			//update
-			return null;
+			companyDAO.update(company);
+			//addressDAO.update(address);
 		}
 	}
 	

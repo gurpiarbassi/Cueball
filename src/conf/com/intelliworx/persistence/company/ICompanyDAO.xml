@@ -91,4 +91,16 @@
   		VALUES (#{name}, #{registrationNumber}, #{code}, #{incorporationDate,jdbcType=VARCHAR}, #{address.primaryKey}, strftime('%Y-%m-%dT%H:%M:%S', current_timestamp, 'localtime'))
   		
   </insert>
+  
+  <update id="update" parameterType="com.intelliworx.persistence.company.ICompanyDTO">
+      	UPDATE COMPANY SET
+	      	NAME = #{name},
+	      	REG_NO = #{registrationNumber},
+	      	CODE = #{code},
+	      	INC_DATE = #{incorporationDate,jdbcType=VARCHAR},
+	      	DATE_MODIFIED = strftime('%Y-%m-%dT%H:%M:%S', current_timestamp, 'localtime'),
+	      	OPT_COUNT =  #{optCount} + 1
+	    WHERE
+	    	ID = #{primaryKey} AND OPT_COUNT = #{optCount} 
+  </update>
 </mapper>

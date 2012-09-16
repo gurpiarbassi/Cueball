@@ -5,4 +5,6 @@ public interface IAddressDAO {
 	public IAddressDTO findByPrimaryKey(int id);
 	
 	public void insert(IAddressDTO addressDTO);
+	
+	public void update(IAddressDTO addressDTO);
 }

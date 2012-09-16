@@ -3,9 +3,9 @@ package com.intelliworx.service.company;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.sql.DataSource;
 
@@ -16,21 +16,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.*;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.intelliworx.persistence.address.IAddressDTO;
 import com.intelliworx.persistence.company.ICompanyDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-// ensures database rollback occurs when test ends.
+// ensures database 'roll back' occurs when test ends.
 @ContextConfiguration(locations = { "classpath:spring/applicationContext.xml",
 		"classpath:spring/spring-dataAccessContext.xml",
-		"classpath:spring/beanRefFactory.xml", "classpath:mybatis/*.*" })
+		"classpath:spring/beanRefFactory.xml", "classpath:spring/sql-error-codes.xml", "classpath:mybatis/*.*" })
 public class TestCompanyService {
 
 	@Autowired
@@ -215,12 +213,70 @@ public class TestCompanyService {
 	}
 
 	@Test
+	@Transactional
 	public void testUpdateCompany() {
+		ICompanyDTO company = companyService.find(1);
+		company.setName("Modified Name");
+		int currentOptCount = company.getOptCount();
+
+		companyService.save(company);
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(
+				(DataSource) beanFactory.getBean("dataSource"));
+		Map<String, Object> companyResult = jdbcTemplate
+				.queryForMap("SELECT * FROM COMPANY WHERE ID = 1");
+
+		String modifiedName = (String) companyResult.get("NAME");
+
+		assertEquals("Modified Name", modifiedName);
+		assertEquals(currentOptCount + 1,
+				((Integer) companyResult.get("OPT_COUNT")).intValue());
+
+		// TODO ensure address is not updated
 
 	}
 
 	@Test
-	public void testAddDuplicateCompany() {
+	@Transactional
+	public void testAddDuplicateCompanyRegNo() {
+
+		ICompanyDTO companyDTO = beanFactory
+				.getBean(com.intelliworx.persistence.company.ICompanyDTO.class);
+		companyDTO.setName("My Test Company");
+		companyDTO.setRegistrationNumber("123435");
+		companyDTO.setCode("Test1234");
+		companyDTO.setIncorporationDate(new LocalDate("1996-01-20"));
+
+		IAddressDTO address = beanFactory
+				.getBean(com.intelliworx.persistence.address.IAddressDTO.class);
+		address.setAddress1("421 Acadia Drive");
+		address.setAddress2("Hamilton");
+		address.setAddress3("Ontario");
+		address.setAddress4("East Coast");
+		address.setAddress5("Canada");
+		address.setPostalCode("L8W 2R4");
+		address.setEmailAddress("myname@mycompany.com");
+		address.setTelephone("99999999999");
+		address.setFax("1111111111");
+
+		companyDTO.setAddress(address);
+		try {
+			companyService.save(companyDTO);
+			fail("Exception not thrown");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	@Transactional
+	public void testDeleteCompany() {
+
+	}
+
+	@Test
+	@Transactional
+	public void testChangeCompanyAddress() {
 
 	}
 
