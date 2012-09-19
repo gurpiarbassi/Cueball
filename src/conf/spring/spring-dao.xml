@@ -4,15 +4,18 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
- <bean id="companyDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-  <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-  <property name="mapperInterface" value="com.intelliworx.persistence.company.ICompanyDAO"/>
- </bean>
+  <bean id="baseDAO" abstract="true" lazy-init="true">
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>  
  
- <bean id="addressDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-  <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-  <property name="mapperInterface" value="com.intelliworx.persistence.address.IAddressDAO"/>
- </bean>
-    
+ 
+ <alias name="companyDTO" alias="com.intelliworx.persistence.company.ICompanyDTO"/>    
+ <bean name="companyDTO" class="com.intelliworx.persistence.company.CompanyDTO"/>
+ 
+ <alias name="companyDao" alias="com.intelliworx.persistence.company.ICompanyDAO"/> 
+ <bean id="companyDao" parent="baseDAO" class="com.intelliworx.persistence.company.CompanyDAOImpl"/>
+ 
+ <alias name="addressDao" alias="com.intelliworx.persistence.address.IAddressDAO"/> 
+ <bean id="addressDao" parent="baseDAO" class="com.intelliworx.persistence.address.AddressDAOImpl"/>    
 
 </beans>
