@@ -233,6 +233,7 @@ public class TestCompanyService {
 				((Integer) companyResult.get("OPT_COUNT")).intValue());
 
 		// TODO ensure address is not updated
+		//TODO also test persisting an unmodified company object
 
 	}
 

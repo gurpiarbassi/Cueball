@@ -1,8 +1,8 @@
 package com.intelliworx.persistence.address;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
+import com.intelliworx.persistence.BaseDAO;
 
-public class AddressDAOImpl extends SqlSessionDaoSupport implements IAddressDAO{
+public class AddressDAOImpl extends BaseDAO implements IAddressDAO{
 
 	private static final String NAMESPACE = "com.intelliworx.persistence.address.IAddressDAO.";
 	private static final String FIND_BY_PK = NAMESPACE + "findByPrimaryKey";
@@ -16,11 +16,11 @@ public class AddressDAOImpl extends SqlSessionDaoSupport implements IAddressDAO{
 
 	@Override
 	public void insert(IAddressDTO addressDTO) {
-		getSqlSession().insert(INSERT, addressDTO);		
+		insert(INSERT, addressDTO);		
 	}
 
 	@Override
 	public void update(IAddressDTO addressDTO) {
-		getSqlSession().insert(UPDATE, addressDTO);
+		insert(UPDATE, addressDTO);
 	}	
 }

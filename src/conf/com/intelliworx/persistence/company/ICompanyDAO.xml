@@ -88,7 +88,7 @@
   
   <insert id="insert" parameterType="com.intelliworx.persistence.company.ICompanyDTO" keyProperty="primaryKey" keyColumn="ID" useGeneratedKeys="true">
       	INSERT INTO COMPANY (NAME, REG_NO, CODE, INC_DATE, ADDRESS_ID, DATE_CREATED)
-  		VALUES (#{name}, #{registrationNumber}, #{code}, #{incorporationDate,jdbcType=VARCHAR}, #{address.primaryKey}, strftime('%Y-%m-%dT%H:%M:%S', current_timestamp, 'localtime'))
+  		VALUES (#{name}, #{registrationNumber}, #{code}, #{incorporationDate,jdbcType=VARCHAR}, #{address.primaryKey}, #{dateCreated,jdbcType=VARCHAR})
   		
   </insert>
   
@@ -98,9 +98,9 @@
 	      	REG_NO = #{registrationNumber},
 	      	CODE = #{code},
 	      	INC_DATE = #{incorporationDate,jdbcType=VARCHAR},
-	      	DATE_MODIFIED = strftime('%Y-%m-%dT%H:%M:%S', current_timestamp, 'localtime'),
-	      	OPT_COUNT =  #{optCount} + 1
+	      	DATE_MODIFIED = #{dateModified,jdbcType=VARCHAR},
+	      	OPT_COUNT =  #{nextOptCount}
 	    WHERE
-	    	ID = #{primaryKey} AND OPT_COUNT = #{optCount} 
+	    	ID = #{primaryKey} AND OPT_COUNT = #{optCount} - 1 
   </update>
 </mapper>

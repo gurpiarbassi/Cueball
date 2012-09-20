@@ -1,8 +1,8 @@
 package com.intelliworx.persistence.company;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
+import com.intelliworx.persistence.BaseDAO;
 
-public class CompanyDAOImpl extends SqlSessionDaoSupport implements ICompanyDAO {
+public class CompanyDAOImpl extends BaseDAO implements ICompanyDAO {
 
 	private static final String NAMESPACE = "com.intelliworx.persistence.company.ICompanyDAO.";
 	private static final String FIND_BY_PK = NAMESPACE + "findByPrimaryKey";
@@ -22,12 +22,12 @@ public class CompanyDAOImpl extends SqlSessionDaoSupport implements ICompanyDAO 
 
 	@Override
 	public void insert(ICompanyDTO companyDTO) {
-		getSqlSession().insert(INSERT, companyDTO);
+		insert(INSERT, companyDTO);
 	}
 
 	@Override
 	public void update(ICompanyDTO companyDTO) {
-		getSqlSession().update(UPDATE, companyDTO);
+		update(UPDATE, companyDTO);
 	}
 
 }
