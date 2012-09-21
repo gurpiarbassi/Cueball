@@ -76,7 +76,7 @@ public class TestCompanyService {
 
 		assertEquals(2012, createdYear);
 		assertEquals(9, createdMonth);
-		assertEquals(16, createdDay);
+		assertEquals(21, createdDay);
 
 		IAddressDTO address = company.getAddress();
 		assertNotNull(address);
@@ -122,7 +122,7 @@ public class TestCompanyService {
 
 		assertEquals(2012, createdYear);
 		assertEquals(9, createdMonth);
-		assertEquals(16, createdDay);
+		assertEquals(21, createdDay);
 
 		IAddressDTO address = company.getAddress();
 		assertNotNull(address);
