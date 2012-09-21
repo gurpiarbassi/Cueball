@@ -14,16 +14,16 @@ public class PersistenceEntity extends ObjectState implements
 	private int optCount;
 	private boolean persisted = false;
 	private int action;
-
-	 /**
-	   * default constructor
-	   */
-	  public PersistenceEntity()
-	  {
-	    super();
-	    state = ObjectState.STATE_NEW;
-	    setOptCount(0);
-	  }
+	
+    /**
+     * Default constructor
+     */
+	public PersistenceEntity()
+	{
+	  super();
+	  state = ObjectState.STATE_NEW;
+	  setOptCount(0);
+	}
 	  
 	public Integer getPrimaryKey() {
 		return primaryKey;
@@ -218,7 +218,7 @@ public class PersistenceEntity extends ObjectState implements
 			return false;
 		}
 
-		// compate the primary keys
+		// compare the primary keys
 		PersistenceEntity other = (PersistenceEntity) obj;
 		if (primaryKey == null) {
 			if (other.primaryKey != null) {

@@ -11,7 +11,14 @@ public class BaseDAO extends SqlSessionDaoSupport{
 	}
 	
 	public void update(String statement, IPersistenceEntity entity){
-		entity.setDateModified(new LocalDateTime());
-		getSqlSession().update(statement, entity);
+//		if(entity.isModified()){
+			entity.setDateModified(new LocalDateTime());
+			getSqlSession().update(statement, entity);	
+			
+//		}
+	}
+	
+	public void delete(String statement, IPersistenceEntity entity){
+		getSqlSession().delete(statement, entity);
 	}
 }

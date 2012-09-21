@@ -16,11 +16,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.intelliworx.persistence.IPersistenceEntity;
 import com.intelliworx.persistence.address.IAddressDTO;
 import com.intelliworx.persistence.company.ICompanyDTO;
 
@@ -217,7 +219,9 @@ public class TestCompanyService {
 	public void testUpdateCompany() {
 		ICompanyDTO company = companyService.find(1);
 		company.setName("Modified Name");
-		int currentOptCount = company.getOptCount();
+		int currentCompanyOptCount = company.getOptCount();
+		int currentAddressOptCount = company.getAddress().getOptCount();
+		//company.getAddress().setAddress1("Test mod");
 
 		companyService.save(company);
 
@@ -225,16 +229,18 @@ public class TestCompanyService {
 				(DataSource) beanFactory.getBean("dataSource"));
 		Map<String, Object> companyResult = jdbcTemplate
 				.queryForMap("SELECT * FROM COMPANY WHERE ID = 1");
+		
+		Map<String, Object> addressResult = jdbcTemplate
+				.queryForMap("SELECT a.* FROM ADDRESS a inner join COMPANY b where a.ID = b.ADDRESS_ID and b.ID = 1");
 
 		String modifiedName = (String) companyResult.get("NAME");
+		
+		int addressOptCount = (Integer)addressResult.get("OPT_COUNT");
 
 		assertEquals("Modified Name", modifiedName);
-		assertEquals(currentOptCount + 1,
+		assertEquals(currentCompanyOptCount + 1,
 				((Integer) companyResult.get("OPT_COUNT")).intValue());
-
-		// TODO ensure address is not updated
-		//TODO also test persisting an unmodified company object
-
+		assertEquals(currentAddressOptCount + 1, addressOptCount);  //address optcount should have changed (unfortunately)
 	}
 
 	@Test
@@ -271,14 +277,62 @@ public class TestCompanyService {
 
 	@Test
 	@Transactional
-	public void testDeleteCompany() {
-
-	}
-
-	@Test
-	@Transactional
 	public void testChangeCompanyAddress() {
 
-	}
+		ICompanyDTO company = companyService.find(1);
+		IAddressDTO address = company.getAddress();
+		int currentCompanyOptCount = company.getOptCount();
+		int currentAddressOptCount = address.getOptCount();
+		address.setAddress1("Test mod");
 
+		companyService.save(company);
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(
+				(DataSource) beanFactory.getBean("dataSource"));
+		Map<String, Object> companyResult = jdbcTemplate
+				.queryForMap("SELECT * FROM COMPANY WHERE ID = 1");
+		
+		Map<String, Object> addressResult = jdbcTemplate
+				.queryForMap("SELECT a.* FROM ADDRESS a inner join COMPANY b where a.ID = b.ADDRESS_ID and b.ID = 1");
+
+		
+		
+		int addressOptCount = (Integer)addressResult.get("OPT_COUNT");
+		int companyOptCount = (Integer)companyResult.get("OPT_COUNT");
+
+		assertEquals("Test mod", (String)addressResult.get("ADDRESS_1"));
+		assertEquals(currentAddressOptCount + 1, addressOptCount);  //address should have changed
+		assertEquals(currentCompanyOptCount + 1, companyOptCount); 
+		
+	}
+	
+	@Test
+	@Transactional
+	public void testDeleteCompanyWithoutDeletingAddress(){
+		ICompanyDTO company = companyService.find(1);
+		company.setAction(IPersistenceEntity.ACTION_DELETE);
+		companyService.save(company);
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate((DataSource) beanFactory.getBean("dataSource"));
+		
+		try{
+			Map<String, Object> companyResult = jdbcTemplate.queryForMap("SELECT * FROM COMPANY WHERE ID = 1");
+			fail("Exception should have been thrown");
+		}
+		catch(DataAccessException dae){
+			System.out.println("No result found for company. Object must have been deleted");
+		}
+		
+		try{
+			Map<String, Object> addressResult = jdbcTemplate
+					.queryForMap("SELECT * FROM ADDRESS where ID = 1");
+			fail("Exception should have been thrown");
+			
+		}
+		catch(DataAccessException dae){
+			System.out.println("No result found for address. Object must have been deleted");
+		}
+	}
+	
+	
 }

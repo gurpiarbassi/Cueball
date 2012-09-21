@@ -1,5 +1,6 @@
 package com.intelliworx.service.company;
 
+import com.intelliworx.persistence.IPersistenceEntity;
 import com.intelliworx.persistence.address.IAddressDAO;
 import com.intelliworx.persistence.address.IAddressDTO;
 import com.intelliworx.persistence.company.ICompanyDAO;
@@ -45,10 +46,14 @@ public class CompanyService implements ICompanyService{
 			companyDAO.insert(company);
 			System.out.println("Inserted the company");
 		}
+		else if(company.getAction() == IPersistenceEntity.ACTION_DELETE){
+			addressDAO.delete(address);
+			companyDAO.delete(company);
+		}
 		else{
 			//update
 			companyDAO.update(company);
-			//addressDAO.update(address);
+			addressDAO.update(address);
 		}
 	}
 	

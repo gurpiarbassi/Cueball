@@ -42,4 +42,26 @@
       	INSERT INTO ADDRESS (ADDRESS_1, ADDRESS_2, ADDRESS_3, ADDRESS_4, ADDRESS_5, POSTAL_CODE, EMAIL, TELEPHONE, FAX, DATE_CREATED)
   		VALUES (#{address1},#{address2},#{address3},#{address4},#{address5},#{postalCode},#{emailAddress},#{telephone},#{fax},#{dateCreated,jdbcType=VARCHAR})  		
   </insert>
+  
+   <update id="update" parameterType="com.intelliworx.persistence.address.IAddressDTO">
+      	UPDATE ADDRESS SET
+	      	ADDRESS_1 = #{address1},
+	      	ADDRESS_2 = #{address2},
+	      	ADDRESS_3 = #{address3},
+	      	ADDRESS_4 = #{address4},
+	      	ADDRESS_5 = #{address5},
+	      	POSTAL_CODE = #{postalCode},
+	      	EMAIL = #{emailAddress},
+			TELEPHONE = #{telephone},
+			FAX = #{fax},
+			DATE_MODIFIED = #{dateModified,jdbcType=VARCHAR},
+	      	OPT_COUNT =  #{nextOptCount}
+	    WHERE
+	    	ID = #{primaryKey} AND OPT_COUNT = #{optCount} - 1 
+  </update>
+  
+    <delete id="delete" parameterType="com.intelliworx.persistence.address.IAddressDTO">
+      	DELETE FROM ADDRESS
+      	WHERE ID = #{primaryKey}
+  </delete>
 </mapper>

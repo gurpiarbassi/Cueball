@@ -8,6 +8,8 @@ public class AddressDAOImpl extends BaseDAO implements IAddressDAO{
 	private static final String FIND_BY_PK = NAMESPACE + "findByPrimaryKey";
 	private static final String INSERT = NAMESPACE + "insert";
 	private static final String UPDATE = NAMESPACE + "update";
+	private static final String DELETE = NAMESPACE + "delete";
+	
 	
 	@Override
 	public IAddressDTO findByPrimaryKey(int id) {
@@ -21,6 +23,11 @@ public class AddressDAOImpl extends BaseDAO implements IAddressDAO{
 
 	@Override
 	public void update(IAddressDTO addressDTO) {
-		insert(UPDATE, addressDTO);
+		update(UPDATE, addressDTO);
 	}	
+	
+	@Override
+	public void delete(IAddressDTO addressDTO) {
+		delete(DELETE, addressDTO);
+	}
 }

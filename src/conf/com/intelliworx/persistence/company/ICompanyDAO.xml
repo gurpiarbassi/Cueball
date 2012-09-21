@@ -103,4 +103,9 @@
 	    WHERE
 	    	ID = #{primaryKey} AND OPT_COUNT = #{optCount} - 1 
   </update>
+  
+  <delete id="delete" parameterType="com.intelliworx.persistence.company.ICompanyDTO">
+      	DELETE FROM COMPANY
+      	WHERE ID = #{primaryKey}
+  </delete>
 </mapper>

@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 
+import com.intelliworx.persistence.IPersistenceEntity;
+
 
 public class MybatisObjectFactory extends DefaultObjectFactory{
 	
@@ -30,11 +32,11 @@ public class MybatisObjectFactory extends DefaultObjectFactory{
 		      return new ArrayList();
 		    }
 		    o = ObjectFactory.getInstance().getInstance(aClass);
-//		    if (o instanceof IPersistenceInfo)
-//		    {
-//		      ((IPersistenceInfo)o).setPersisted();
-//		      ((IPersistenceInfo) o).setLoaded();
-//		    }
+		    if (o instanceof IPersistenceEntity)
+		    {
+		      ((IPersistenceEntity)o).setPersisted();
+		      ((IPersistenceEntity)o).setLoaded();
+		    }
 
 		    return o;
 		  }

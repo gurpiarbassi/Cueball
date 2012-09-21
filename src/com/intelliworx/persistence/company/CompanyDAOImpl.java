@@ -9,6 +9,7 @@ public class CompanyDAOImpl extends BaseDAO implements ICompanyDAO {
 	private static final String FIND_BY_CODE = NAMESPACE + "findByCompanyCode";
 	private static final String INSERT = NAMESPACE + "insert";
 	private static final String UPDATE = NAMESPACE + "update";
+	private static final String DELETE = NAMESPACE + "delete";
 	
 	@Override
 	public ICompanyDTO findByPrimaryKey(int id) {
@@ -29,5 +30,9 @@ public class CompanyDAOImpl extends BaseDAO implements ICompanyDAO {
 	public void update(ICompanyDTO companyDTO) {
 		update(UPDATE, companyDTO);
 	}
-
+	
+	@Override
+	public void delete(ICompanyDTO companyDTO) {
+		delete(DELETE, companyDTO);
+	}
 }
